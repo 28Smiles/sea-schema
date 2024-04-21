@@ -49,8 +49,8 @@ impl Iterator for TableConstraintsQueryResultParser {
                 let mut foreign_columns = Vec::new();
 
                 columns.push(result.column_name.unwrap());
-                let table = result.referential_key_table_name.unwrap_or_else(|| result.table_name.clone());
-                foreign_columns.push(result.referential_key_column_name.or_else(|| result.column_name.clone()).unwrap());
+                let table = result.referential_key_table_name.unwrap();
+                foreign_columns.push(result.referential_key_column_name.unwrap());
                 let on_update =
                     ForeignKeyAction::from_str(&result.update_rule.clone().unwrap_or_default());
                 let on_delete =
